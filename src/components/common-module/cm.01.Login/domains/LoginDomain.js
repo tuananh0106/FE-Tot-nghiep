@@ -75,33 +75,42 @@ export function CM01LoginDomain() {
       common?.backdrop(false);
     }
   }
+
   //------------------- navigation ----------------------
+  
   async function regist({ name, email, password, role }) {
     try {
       common?.backdrop(true);
       const url = `http://localhost:8080/auth/signup`;
+      
       let dataIp = {
         name: name,
         email: email,
         password: password,
         role: role,
       };
+
       await axios({
         method: 'post',
         url: url,
         data: dataIp,
       }).then((res) => {
+
         console.log(res.data, 'res');
         if (res?.data.success) {
           message.success('Đăng ký thành công');
         }
+
+        return true;
       });
+
     } catch (error) {
       console.log(error);
       return false;
     } finally {
       common?.backdrop(false);
     }
+
     return true;
   }
   const domainInterface = useRef({
