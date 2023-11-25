@@ -11,7 +11,7 @@ export function UserHomeContent() {
   useEffect(() => {
     // khởi tạo  => biến cục bộ
     domain.initDomain();
-  }, []);
+  }, [domain]);
 
   return (
     <div className="h-full pt-8 pl-8 pr-8">

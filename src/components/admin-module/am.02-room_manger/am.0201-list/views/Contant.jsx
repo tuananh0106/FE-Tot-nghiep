@@ -4,6 +4,7 @@ export const ROLE_CONVERT = {
   USER: 'USER',
   ADMIN: 'ADMIN',
 };
+
 export function STATUS_RENDER(status) {
   switch (status) {
     case 0:

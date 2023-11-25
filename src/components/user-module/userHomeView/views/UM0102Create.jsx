@@ -16,14 +16,17 @@ import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useUpdateEffect } from 'react-use';
 import UploadImg from './UploadImg';
-const { RangePicker } = DatePicker;
+// const { RangePicker } = DatePicker;
 
 export default function UM0102List({ context, domain }) {
   const [form] = Form.useForm();
-  const { mode, dataDetail } = context || {};
+  const { dataDetail } = context || {};
   const [fileList, setFileList] = useState([]);
+
   useUpdateEffect(() => {
     const { roomResponse, imageStoreLink } = dataDetail || {};
+    console.log(imageStoreLink);
+
     form.setFieldsValue({
       floor: roomResponse?.floor,
       numberRoom: roomResponse?.numberRoom,
@@ -104,7 +107,7 @@ export default function UM0102List({ context, domain }) {
                 }
                 parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
               />
-            </Form.Item>{' '}
+            </Form.Item>
             <Form.Item name="directBooking">
               <Radio.Group disabled={true}>
                 <Radio value={true}>Trực tiếp</Radio>
@@ -204,7 +207,6 @@ export default function UM0102List({ context, domain }) {
                 name={'files'}
                 fileList={fileList}
                 setFileList={setFileList}
-                mode={mode}
               />
             </Col>
           </Row>

@@ -1,10 +1,12 @@
 import { EyeOutlined } from '@ant-design/icons';
+import { formatCurrency } from '@common/Utils';
 import { Card, Modal, Space, Table, Tooltip } from 'antd';
+import _ from 'lodash';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 export default function UM0201List({ context, domain }) {
-  const { listDataTable, listDataCount } = context || {};
+  const { listDataTable, listBookingRoomStatus } = context || {};
   const [data, setData] = useState(listDataTable);
 
   useEffect(() => {
@@ -41,10 +43,11 @@ export default function UM0201List({ context, domain }) {
       render: (value) => moment(value).format('DD/MM/YYYY HH:mm'),
     },
     {
-      title: 'Số tiền cọc',
+      title: 'Số tiền cọc (VND)',
       dataIndex: 'deposit',
       key: 'deposit',
       width: 300,
+      render: (value) => formatCurrency(value),
     },
     {
       title: 'Hình thức đặt phòng',
@@ -60,15 +63,26 @@ export default function UM0201List({ context, domain }) {
       },
     },
     {
+      title: 'Trạng thái đặt phòng',
+      dataIndex: 'status',
+      key: 'status',
+      width: 300,
+      render: (value) =>
+        _.find(
+          listBookingRoomStatus,
+          (item) => item?.value == value,
+        )?.name || '',
+    },
+    {
       title: 'Action',
       key: 'action',
       fixed: 'right',
       width: 200,
-      render: (_, record, index) => (
+      render: (_, record) => (
         <Tooltip
           title="Xem chi tiết"
           color="#1677ff"
-          onClick={(e) => {
+          onClick={() => {
             domain.goToViewPage(record.id);
           }}
         >
@@ -84,7 +98,7 @@ export default function UM0201List({ context, domain }) {
     <>
       <Modal></Modal>
       <Card
-        title="Danh sách phòng khách sạn"
+        title="Danh sách phòng đã đặt"
         extra={<Space className="w-[800]"></Space>}
       >
         <Table columns={columns} dataSource={data} />

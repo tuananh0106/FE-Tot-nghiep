@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UM0201Service from '../services/UM0201Service';
+import { message } from 'antd';
 
 export function UM0201Domain() {
   const [context, contextService] = UM0201Service();
@@ -11,6 +12,7 @@ export function UM0201Domain() {
     {
       listDataTable: null,
       listDataCount: null,
+      listBookingRoomStatus: []
     } || context,
   );
   const navigate = useNavigate();
@@ -22,7 +24,10 @@ export function UM0201Domain() {
     await contextService.initContext(contextRef.current);
 
     await getDataTable();
+    await getListBookingRoomStatus();
   };
+
+  //Danh sách phòng đã đặt
   const getDataTable = async (
     page = 0,
     pageSize = 1000000,
@@ -56,10 +61,33 @@ export function UM0201Domain() {
       common?.backdrop(false);
     }
   };
+
+  //Danh sách trạng thái của phòng đã đặt
+  const getListBookingRoomStatus = async () => {
+    try {
+      common?.backdrop(true); // tạo spin quay
+      const url = `/user/bookroom/status`;
+      const response = await axiosAPI.get(url);
+      const { code, data } = response?.data || {};
+      if (code === 200 && data) {
+        contextRef.current.listBookingRoomStatus = data;
+        await contextService.updateContext(contextRef.current);
+      } else {
+        message.error(response.data.message);
+      }
+      return data;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      common?.backdrop(false);
+    }
+  };
+
   //------------------- navigation ----------------------
   const goToViewPage = (id) => {
-    navigate(`/user/home/view/${id}`);
+    navigate(`/user/bookroom/view/${id}`);
   };
+  
   const goToCreatePage = () => {
     navigate(`/user/home/${'create'}/${null}`);
   };
@@ -69,6 +97,7 @@ export function UM0201Domain() {
     getDataTable,
     goToViewPage,
     goToCreatePage,
+    getListBookingRoomStatus,
   });
   return [context, domainInterface.current];
 }

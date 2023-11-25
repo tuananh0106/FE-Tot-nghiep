@@ -3,7 +3,6 @@ import { Button, Card, Form, Input, Modal, Row, Typography, message } from "antd
 export function Register(props) {
     const { login, domain , setLogin } = props;
 
-    console.log(props);
     const [form] = Form.useForm();
 
     async function register() {
