@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { EyeOutlined, SearchOutlined } from '@ant-design/icons';
+import { EyeOutlined } from '@ant-design/icons';
 import useAxiosAPI from '@core/hooks/UseAxiosAPI';
 import UseCommon from '@core/hooks/UseCommon';
-import { Card, Input, Space, Table, Tooltip } from 'antd';
+import { Card, Table, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useMainStore } from 'src/store/hook';
 import { roomTypeActions } from 'src/store/reducer';
@@ -81,27 +81,6 @@ export default function RoomTypeListPage() {
   return (
     <Card
       title="Quản lý loại phòng"
-      extra={
-        <Space className="w-[800]">
-          <Input
-            placeholder="Tìm kiếm theo tên khách sạn"
-            allowClear
-            prefix={<SearchOutlined />}
-            className="w-[600]"
-            onChange={(e) => {
-              const currValue = e.target.value.trim();
-              const filteredData = roomTypeList?.filter(
-                (entry) =>
-                  entry?.nameHotel
-                    ?.toLowerCase()
-                    .includes(currValue.toLowerCase()) ||
-                  entry?.telephoneContact.includes(currValue.toLowerCase()),
-              );
-              setData(filteredData);
-            }}
-          />
-        </Space>
-      }
     >
       <Table rowKey="id" columns={columns} dataSource={data} key="id" />
     </Card>

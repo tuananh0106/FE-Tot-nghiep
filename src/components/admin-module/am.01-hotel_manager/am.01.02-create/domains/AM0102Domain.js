@@ -26,7 +26,7 @@ export function AM0102Domain() {
       await getDataDetail();
     }
   };
-  const getDataDetail = async (params) => {
+  const getDataDetail = async () => {
     try {
       common?.backdrop(true); // tạo spin quay
       const url = `/admin/hotel/detail?id=${id}`;

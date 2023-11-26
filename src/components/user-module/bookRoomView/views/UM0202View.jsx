@@ -59,7 +59,7 @@ export default function UM0202View({ context, domain }) {
               ? 'Check in'
               : status == 1
                 ? 'Check out'
-                : 'Xem bảng giá'}
+                : 'Xem Hóa Đơn'}
 
           </Button>,
         ]}

@@ -109,7 +109,7 @@ export function UM0202Domain() {
 
   //------------------- navigation ----------------------
   function goToHomePage() {
-    navigate(`/user/home`);
+    navigate(`/user/bookroom`);
   }
   function goBack() {
     navigate(-1);

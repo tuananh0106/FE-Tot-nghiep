@@ -12,7 +12,7 @@ export function UM0201Domain() {
     {
       listDataTable: null,
       listDataCount: null,
-      listBookingRoomStatus: []
+      listBookingRoomStatus: [],
     } || context,
   );
   const navigate = useNavigate();
@@ -87,16 +87,11 @@ export function UM0201Domain() {
   const goToViewPage = (id) => {
     navigate(`/user/bookroom/view/${id}`);
   };
-  
-  const goToCreatePage = () => {
-    navigate(`/user/home/${'create'}/${null}`);
-  };
 
   const domainInterface = useRef({
     initDomain,
     getDataTable,
     goToViewPage,
-    goToCreatePage,
     getListBookingRoomStatus,
   });
   return [context, domainInterface.current];

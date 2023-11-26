@@ -115,7 +115,7 @@ const UserListPage = () => {
               setData(filteredData);
             }}
           />
-          <Button className="text-cyan-1 bg-blue-6">Thêm mới</Button>
+          <Button className="text-cyan-1 bg-blue-6">Tìm kiếm</Button>
         </Space>
       }
     >

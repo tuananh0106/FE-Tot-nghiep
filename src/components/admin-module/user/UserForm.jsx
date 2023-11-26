@@ -173,25 +173,25 @@ const UserForm = ({ mode = 'view' }) => {
         >
           Quay lại
         </Button>,
-        <Button
-          className="text-cyan-1 bg-blue-6"
-          onClick={() => {
-            if (currentMode == 'view') {
-              setCurrentMode('edit');
-            } else if (currentMode == 'create') {
-              create();
-            } else if (currentMode === 'edit') {
-              edit();
-            }
-          }}
-          key={2}
-        >
-          {currentMode == 'create'
-            ? 'Thêm mới'
-            : currentMode == 'view'
-            ? 'Chỉnh sửa'
-            : 'Xác nhận chỉnh sửa'}
-        </Button>,
+        // <Button
+        //   className="text-cyan-1 bg-blue-6"
+        //   onClick={() => {
+        //     if (currentMode == 'view') {
+        //       setCurrentMode('edit');
+        //     } else if (currentMode == 'create') {
+        //       create();
+        //     } else if (currentMode === 'edit') {
+        //       edit();
+        //     }
+        //   }}
+        //   key={2}
+        // >
+        //   {currentMode == 'create'
+        //     ? 'Thêm mới'
+        //     : currentMode == 'view'
+        //     ? 'Chỉnh sửa'
+        //     : 'Xác nhận chỉnh sửa'}
+        // </Button>,
       ]}
     >
       <Form
